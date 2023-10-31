@@ -31,6 +31,9 @@ router.use('/tasks', AuthentificationMiddleware.authenticateToken, taskRouter);
 router.use('/test', testRouter);
 app.use("/api", router);
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Serveur Express lancé sur le port ${port}`);
 });
+
+server.keepAliveTimeout = 120 * 1000;
+server.headersTimeout = 120 * 1000;
